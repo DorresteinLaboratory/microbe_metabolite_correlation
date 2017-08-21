@@ -48,6 +48,7 @@ flattenCorrMatrix <- function(cormat, pmat) {
  
 library(Hmisc)
  
+ctab <- cbind(tab1c, tab2c)
 res<-rcorr(as.matrix(ctab), type="spearman")
 
 flat <- flattenCorrMatrix(res$r, res$P)
