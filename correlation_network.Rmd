@@ -9,7 +9,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Spearman correlation
 
-this is a demo of spearman correlation, used as a proxy to rare co-presence/absence of metabolites/microbes. The code is not optimized and we used a computer with a large amount of RAM memory (64GB). 
+This is a demo of spearman correlation, used as a proxy to rare co-presence/absence of metabolites/microbes. The code is not optimized and we used a computer with a large amount of RAM memory (64GB). 
 
 Load data and label rows with sample names:
 
@@ -101,13 +101,16 @@ Format the graph and export to Cytoscape.
 
 ```{r eval=FALSE}
 g2 <- new("graphNEL", edgemode = "undirected")
-  i <- 1
-  system.time(lapply(gr@edgeL, function(x) {
-  if (length(x$edges)) {
-  gr@edgeL[[i]]$edges <<- x$edges[x$edges > i]
-  }
-  i <<- i + 1
-}))
+
+i <- 1
+system.time(lapply(gr@edgeL, function(x) {
+  				if (length(x$edges)) {
+  					gr@edgeL[[i]]$edges <<- x$edges[x$edges > i]
+  				}
+  				i <<- i + 1
+			    }
+		)
+)
 cw5 <- new.CytoscapeWindow("corWindow", graph = g2, overwriteWindow = TRUE)
 cw5@graph <- gr
 layoutNetwork(cw5, layout.name = "jgraph-spring")
